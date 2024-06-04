@@ -1,0 +1,129 @@
+<style>
+
+
+   nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: green;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0.7rem 3rem;
+    justify-content: space-between;
+
+  }
+
+   a{
+       text-decoration: none;
+   }
+   h1{
+       color: white;
+         margin: 0;
+    }
+
+   .dropdown {
+  float: left;
+  overflow: hidden;
+   }
+   .dropbtn {
+  font-size: 17px;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+   }
+   .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+   .dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+
+  .topnav a:hover, .dropdown:hover .dropbtn {
+  background-color: #389138;
+  color: white;
+}
+
+  .account-btn.dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+   .dropdown:hover .dropdown-content {
+  display: block;
+}
+   .account-btn a{
+       color:white;
+       padding: 0.5rem;
+       font-size:17px;
+   }
+   .another-btn a{
+         color:white;
+       padding: 0.5rem;
+       font-size:17px;
+   }
+.nav-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+</style>
+<script>
+
+</script>
+
+<nav>
+
+    <a href="{% url 'main_page' %}"><h1>Pedal Pals Bicycle Rentals</h1></a>
+    <div class="nav-content">
+        <div class="another-btn">
+            <a href="#">Contact 000-523-434</a>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Bikes<i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="{%url 'e_bikes' %}">E-Bikes</a>
+                <a href="{% url 'city_bikes' %}">City Bikes</a>
+                <a href="{% url 'mountain_bikes' %}">Mountain Bikes</a>
+                <a href="{% url 'road_bikes' %}">Road Bikes</a>
+            </div>
+        </div>
+        {% if user.is_authenticated %}
+           <div class="dropdown">
+            <button class="dropbtn">My Account <i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="{%url 'report_damage'%}">Report Damage</a>
+                    <a href="{%url 'bike_history'%}">My History</a>
+                    <a href="{%url 'logout'%}">Logout</a>
+                </div>
+           </div>
+            </div>
+        {% else %}
+            <div class="account-btn">
+                <a href="{%url 'login'%}">Login</a>
+                <a href="{%url 'registration'%}">Registration</a>
+            </div>
+        
+               
+            
+        {% endif %}
+    </div>
+</nav>
+

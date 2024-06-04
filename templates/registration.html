@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+<!-- $pip install django-widget-tweaks and I added settings.py-->
+
+{% block content %}
+    <style>
+ .form-header {
+    padding-bottom:10px;
+}
+.form-inputs {
+    padding-top:20px;
+}
+.error-box {
+    padding-top:10px;
+}
+.form-button {
+    padding-top:20px;
+}
+
+.error {
+    color: red;
+    font-size: smaller;
+}
+ .registration-form {
+  width: 400px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+     margin-top: 5em;
+}
+
+.registration-form h1 {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+    color:#4caf50;
+}
+
+.registration-form .form-inputs input{
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.registration-form .btn {
+  width: 100%;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.registration-form .btn:hover {
+  background-color: #45a049;
+}
+    </style>
+
+
+<form class="registration-form" action="{% url 'registration' %}" method="post">
+    {% csrf_token %}
+
+   <div class="form-header">
+    <h1>Sign Up</h1>
+   </div>
+  <div class="form-inputs">
+
+    {% render_field form.first_name placeholder="First Name" name="first_name" %}
+    {% render_field form.last_name placeholder="Surname" name="surname"%}
+      {% render_field form.email placeholder="Email" name="email" %}
+      {% render_field form.username placeholder="Username"  name="username" %}
+      {% render_field form.password placeholder="Password" name="password" class="form-control" data-toggle="password"%}
+      {% render_field form.age placeholder="Age (optional)" name="age"%}
+      {% render_field form.phone_number placeholder="Phone Number (optional)" name="phone_number"%}
+      {% render_field form.address placeholder="Address (optional)" name="address" %}
+      <!-- render_field prevent the user refill the form once again-->
+ </div>
+<div class="form-button">
+    <div>
+      <button type="submit" class="btn">Sign Up</button>
+    </div>
+</div>
+  <div class="error-box">
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="error">{{ error }}</div>
+        {% endfor %}
+    {% endfor %}
+  </div>
+  </form>
+{% endblock %}

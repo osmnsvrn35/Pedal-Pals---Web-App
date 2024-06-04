@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  .rental-history-table {
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+    .rental-history-table th, .rental-history-table td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+    .rental-history-table th {
+        background-color: #f2f2f2;
+        color: #4caf50;
+    }
+</style>
+
+
+<h1>Report Damage</h1>
+
+<h1>Rental History</h1>
+
+  <table class="rental-history-table">
+      <thead>
+          <tr>
+              <th>Bike ID</th>
+              <th>Bike Name</th>
+              <th>Rental Start Date</th>
+              <th>Rental End Date</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for rental in rental_history %}
+          <tr>
+              <td>{{ rental.id }}</td>
+              <td>{{ rental.bike }}</td>
+              <td>{{ rental.start_time }}</td>
+              <td>{{ rental.end_time }}</td>
+              
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+{% endblock %}

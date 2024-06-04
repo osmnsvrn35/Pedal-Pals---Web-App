@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+table.bike-table {
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+}
+    .slogan {
+        margin-top: 100px;
+        text-align: center;
+    }
+    .slogan h1 {
+        color: #013801;
+        margin-bottom: 30px;
+    }
+    .bike-table {
+border: 1px solid black;
+        margin: auto;
+        width: 60%;
+         border-radius: 5px;
+    }
+    .bike-table td {
+        width: 50%;
+        vertical-align: top;
+        margin-bottom: 16px;
+    }
+    .bike-table h3, .bike-table p {
+        margin: 0;
+    }
+    .bike-table h3{
+
+        margin-bottom: 12px;
+    }
+    .bike-table button {
+        background-color: #013801;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-top: 16px;
+    }
+    .bike-table button:hover {
+        background-color: #006400;
+    }
+    a{
+        color: inherit;
+       text-decoration: none;
+    }
+</style>
+
+<div class="slogan">
+    <h1>"Ride the Trails with Our Top-of-the-Line Mountain Bikes!"</h1>
+</div>
+
+{% for bike in mountain_bikes %}
+    <table class="bike-table">
+        <tr>
+            <td>
+                <h3>{{ bike.name }}</h3>
+                <p>{{ bike.description }}</p><br>
+                <p style="color: green; font-weight: bold; font-size: 20px;">Prices start ${{ bike.price_per_day }} per day</p>
+                {% if bike.available %}
+                    <button><a href="{%url 'reservation' bike.id %}">Reserve</a></button>
+                {% else %}
+                    <p>Not available</p>
+                {% endif %}
+            </td>
+            <td>
+                <img src="{{ bike.image.url }}" alt="{{ bike.name }}" width="250" height="150">
+            </td>
+        </tr>
+    </table>
+{% endfor %}
+
+{% endblock %}

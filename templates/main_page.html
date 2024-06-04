@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+   <style>
+       .bg-img{
+    background-image: url('/media/bike_images/web_picture.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-color: grey;
+           background-blend-mode: multiply;
+   }
+       .bg-img h1{
+           margin-top: 5em;
+           margin-left:17.5%;
+           font-size: 50px;
+
+       }
+   </style>
+<body>
+    <div class="bg-img">
+      <h1>
+          "Ride with friends, pedal with Pedal Pals"
+      </h1>
+    </div>
+</body>
+
+{% endblock %}

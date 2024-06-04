@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<style>
+
+.error {
+    color: red;
+    font-size: smaller;
+}
+
+ .login-form {
+     width: 300px;
+     margin: 0 auto;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     padding: 20px;
+     margin-top: 7.5em;
+ }
+
+ .login-form h1 {
+     margin: 0;
+     padding: 20px;
+     text-align: center;
+     color:#4caf50;
+ }
+
+ .login-form .form-inputs input {
+     width: 100%;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     margin-bottom: 10px;
+     padding: 10px;
+     box-sizing: border-box;
+ }
+
+ .login-form .btn {
+     width: 100%;
+     background-color: #4caf50;
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     padding: 13px;
+     cursor: pointer;
+     margin-top: 10px;
+ }
+
+ .login-form .btn:hover {
+     background-color: #45a049;
+ }
+
+a.forgot-password {
+  display: block;
+  margin-top: 1rem;
+  text-align: center;
+  color: #666;
+  text-decoration: none;
+    padding: 15px;
+}
+
+a.forgot-password:hover {
+  color: #333;
+}
+
+</style>
+<div class="login-form">
+    <h1>Login</h1>
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token%}
+        <div class="form-inputs">
+            <input type="text" placeholder="username" id="username" name="username" required>
+            <input type="password"  placeholder="Password" id="password" name="password" required>
+            <button type="submit" class="btn">Log in</button>
+            <a href="{% url 'forgot_password' %}" class="forgot-password">Forgot your password?</a>
+            <div class="error">
+   {% for message in messages %}
+       <p>{{ message }}</p>
+   {% endfor %}
+</div>
+       </div>
+    </form>
+</div>
+{% endblock %}

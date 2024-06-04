@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    body {
+font-family: sans-serif;
+background-color: #f0f0f0;
+display: flex;
+min-height: 100vh;
+flex-direction: column;
+margin: 0;
+padding: 0;
+}
+
+p{
+    margin-top: 20px;
+}
+ footer {
+  margin-top: auto;
+}
+
+    </style>
+</head>
+
+<body>
+
+{% include "navigation.html"%}
+
+ {% block content %}
+
+
+{% include "main_page.html" %}
+
+{% endblock %}
+
+<footer>
+    <div>
+      <p><hr>Copyright &copy; 2022 Rental Web Page. All Rights Reserved.</p>
+    </div>
+
+</footer>
+</body>
+</html>

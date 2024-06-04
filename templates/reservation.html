@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <style xmlns="http://www.w3.org/1999/html">
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    font-weight: bold;
+}
+
+.form-control {
+    border-radius: .25rem;
+    border: 1px solid #ced
+  }
+  .reservation-form {
+    width: 500px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 7.5em;
+    text-align: center;
+}
+
+.reservation-form h2 {
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    color: #013801;
+}
+
+.reservation-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.reservation-form input[type="datetime-local"] {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.reservation-form .total {
+    font-weight: bold;
+    margin-top: 20px;
+    color: green;
+}
+
+.reservation-form input[type="submit"] {
+    width: 100%;
+    background-color: #013801;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 13px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.reservation-form input[type="submit"]:hover {
+    background-color: #006400;
+}
+total_cost{
+    text-align: center;
+}
+
+</style>
+
+
+<script>
+    function calculateTotalCost() {
+        var start_time = document.querySelector("input[name='start_time']").value;
+        var end_time = document.querySelector("input[name='end_time']").value;
+        var price_per_day = {{ bike.price_per_day }};
+
+        var start_date = new Date(start_time);
+        var end_date = new Date(end_time);
+
+        var time_diff = Math.abs(end_date.getTime() - start_date.getTime());
+        var diff_days = Math.ceil(time_diff / (1000 * 3600 * 24));
+
+        var total_cost = price_per_day * diff_days;
+        document.querySelector("input[name='total_cost']").value = total_cost;
+    }
+</script>
+
+
+    <h2>Make a reservation for {{ bike.name }}</h2>
+    <form method="post" class="reservation-form">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="start_time">Start Time:</label>
+            <input onchange="calculateTotalCost()" type="date" name="start_time" required class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="end_time">End Time:</label>
+            <input onchange="calculateTotalCost()" type="date" name="end_time" required class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="total_cost">Total Cost:</label>
+            <input type="text" name="total_cost" value="{{ total_cost }}" class="form-control" readonly>
+        </div>
+
+        <input type="submit" value="Reserve" class="btn btn-primary"><a href="#" %}></a></input>
+    </form>
+{% endblock %}

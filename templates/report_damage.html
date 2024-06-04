@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <style>
+ .report-damage-form {
+        width: 400px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin-top: 7.5em;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .report-damage-form h1 {
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+        color: #4caf50;
+    }
+    .report-damage-form .form-inputs input {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    .report-damage-form textarea {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+        resize: none;
+
+    }
+    .report-damage-form .btn {
+        width: 100%;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 13px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .report-damage-form .btn:hover {
+        background-color: #45a049;
+    }
+
+    .form-inputs select{
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+</style>
+
+
+<h1>Report Damage</h1>
+
+<div class="report-damage-form">
+    <h1>Report Damage</h1>
+    <form action="{% url 'report_damage' %}" method="post">
+        {% csrf_token %}
+        <div class="form-inputs">
+             <select id="bike_id" name="bike_id" required>
+           {% for bike in bikes %}
+              <option value="{{ bike.id }}">{{ bike.name }}</option>
+           {% endfor %}
+          </select>
+            <textarea placeholder="Description of Damage" id="description" name="description" required></textarea>
+            <button type="submit" class="btn">Submit Report</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
